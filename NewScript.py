@@ -295,14 +295,14 @@ def normal_check_data(data_path):
                 unreadables.append(path)
                 continue  # to loop 2
 
-            if n == len(unreadables):  # if it is the first readable image
+            if n == len(unreadables)+len(wrong_colors):  # if it is the first readable image
                 if len(img.shape) == 2 or img.shape[2] == 1:  # there are 0/1 channels - grayscale, can't learn from it
                     wrong_colors.append(path)
-                else:  # there are 3/4 channels - RGB/RGBA color formats respectively
+                else:  # first good colored - there are 3/4 channels - RGB/RGBA color formats respectively
                     CHANNELS = img.shape[2]  # state how many channels the program will handle
+                    batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH, CHANNELS))  # like an empty batch
 
             else:  # any other image
-                batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH, CHANNELS))  # like an empty batch
                 try:  # color format check
                     img = resize(img, (IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
                     batch[0] = img  # here is supposed to be the fail
@@ -364,14 +364,13 @@ def gray_check_data(data_path):
             if n == len(unreadables):  # if it is the first readable image
                 if len(img.shape) == 2:  # 0 channels - grayscale
                     CHANNELS = 0
+                    batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH))  # like an empty batch for 2d images
                 else:  # there are 1/3/4 channels - Grayscale/RGB/RGBA color formats respectively
                     CHANNELS = img.shape[2]
-            else:  # any other image
                 if CHANNELS == 0:
-                    batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH))  # like an empty batch for 2d images
-                else:
-                    batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH, CHANNELS))  # like an empty batch for 3d images
-
+                    batch = np.zeros((2, IMG_HEIGHT, IMG_WIDTH, CHANNELS))  # like an empty batch for 3d images                    
+            
+            else:  # any other image
                 try:  # color fomrat check
                     img = resize(img, (IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
                     batch[0] = img  # here is supposed to be the fail
@@ -424,7 +423,7 @@ def normal_split_data():
 def gray_split_data():
     # inputs global quantity, then cut IMAGES_PATHS to the quantity
     global TEST_PATHS
-    if len(IMAGES_PATHS) != 1:  # if there is more than one image
+    if len(IMAGES_PATHS) != 1:  # if there are more than one image
         while True:  # doesn't stop until quantity is ok
             quantity = int_verify("\nEnter how many images to take for predicting:    ")
             if quantity > len(IMAGES_PATHS):
