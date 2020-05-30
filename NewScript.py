@@ -394,7 +394,7 @@ def normal_split_data():
         train_quantity = int_verify(
             "\nEnter how many images to take for training proccess, "
             "including validation in 2:8 ratio (hundreds~thousands):    ",
-            min_=100)
+            min_=BATCH_SIZE*5)
         # split train and validate in 8:2 ratio
         validate_quantity, train_quantity = int(train_quantity * 0.2), int(train_quantity * 0.8)
 
