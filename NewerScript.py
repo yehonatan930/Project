@@ -711,9 +711,6 @@ def sampling_images(grays=False):
         plt.subplots_adjust(wspace=0.01, hspace=0.01)
         plt.tight_layout()
 
-
-sampling_images()
-
 # %% [markdown]
 # # RUN
 
