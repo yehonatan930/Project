@@ -6,5 +6,4 @@ Contains:
   A video showing a typical run of the script - mv4.
  
   Dataset in https://www.kaggle.com/yehonatan930/flickr-image-dataset-30k
-  
-  
+  Script in https://www.kaggle.com/yehonatan930/fork-of-project
