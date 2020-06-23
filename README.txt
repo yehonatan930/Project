@@ -6,6 +6,6 @@ Contains:
 
 A video showing the oral exam: https://1drv.ms/v/s!AsNZggxhuzRzkutZizqEkiyY2mTIqw
 
-Dataset in:	 https://www.kaggle.com/yehonatan930/flickr-image-dataset-30k. 
-Script in:	 https://www.kaggle.com/yehonatan930/fork-of-project
+Dataset in: https://www.kaggle.com/yehonatan930/flickr-image-dataset-30k. 
+Script in: https://www.kaggle.com/yehonatan930/fork-of-project
 
